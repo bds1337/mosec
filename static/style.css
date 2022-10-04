@@ -1,0 +1,70 @@
+/* Tusur mosec for embedded webapp
+ * Tusur brand colors - https://design.tusur.ru/palette.html
+ * color: #3C388D - highlights blue (microelectronics)
+ * color: #652580 - additional purple
+ * color: #9FC53A - additional green (medicine)
+ * color: #36CCE8 - additional aqua
+ * color: #6C8899 - grey (info-bez)
+ */
+
+body {
+    font-family: "Verdana", monospace;
+    color: #393939;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: #3C388D;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #9fc53a;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.main {
+    margin-left: 240px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+.button,
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  background-color: #3C388D;
+  border: 0.1rem solid #3C388D;
+}
+
+.button:focus, .button:hover,
+button:focus,
+button:hover,
+input[type='button']:focus,
+input[type='button']:hover,
+input[type='reset']:focus,
+input[type='reset']:hover,
+input[type='submit']:focus,
+input[type='submit']:hover {
+  background-color: #9FC53A;
+  border-color: #9FC53A;
+}

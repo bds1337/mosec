@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>mosec demo</title>
+  <link rel="stylesheet" type="text/css" href="/static/app.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+</head>
+<body>
+ <div class="sidebar container">
+   <h3>Модуль безопасности</h3>
+   <p></p>
+   <ul>
+    <li><a href="/">Главная</a></li>
+     <li><a href="#audit">Журнал</a></li>
+   </ul>
+ </div>
+ <div class="main container">
+  {% block content %}{% endblock content %}
+</div>
+</body>
+</html>

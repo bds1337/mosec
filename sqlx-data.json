@@ -1,0 +1,69 @@
+{
+  "db": "SQLite",
+  "7fd9503b0277ab35b62f733f40c43ef3f7d6adea1808e8bc952d99b350d7700b": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "subject_from",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "subject_to",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "time",
+          "ordinal": 3,
+          "type_info": "Datetime"
+        },
+        {
+          "name": "msg",
+          "ordinal": 4,
+          "type_info": "Text"
+        },
+        {
+          "name": "encrypted",
+          "ordinal": 5,
+          "type_info": "Bool"
+        }
+      ],
+      "nullable": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "parameters": {
+        "Right": 0
+      }
+    },
+    "query": "SELECT * FROM audits"
+  },
+  "f859303307a41e3d3391e4d6514c4482c705348e63c91b8dfe8bbce0d4357045": {
+    "describe": {
+      "columns": [
+        {
+          "name": "subject_from",
+          "ordinal": 0,
+          "type_info": "Text"
+        }
+      ],
+      "nullable": [
+        true
+      ],
+      "parameters": {
+        "Right": 0
+      }
+    },
+    "query": "\n            SELECT subject_from FROM audits WHERE id = 1\n            "
+  }
+}

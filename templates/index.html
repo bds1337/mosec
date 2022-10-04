@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Журнал транзакций</h3>
+    <table>
+        <tr>
+            <th>Время</th>
+            <th>Откуда</th>
+            <th>Куда</th>
+            <th>Шифрование</th>
+        </tr>
+        {% for row in audits %}
+        <tr>
+            <th>{{row.time}}</th>
+            <th>{{row.subject_from}}</th>
+            <th>{{row.subject_to}}</th>
+            {% if row.encrypted %}
+            <th>Зашифрован</th>
+            {% else %}
+            <th>Открытый</th>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
