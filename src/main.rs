@@ -3,16 +3,25 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder, Error,
 };
 use actix_files::{Files};
 use dotenvy::dotenv;
+use system::get_host_info;
 use std::env;
 
 use tera::{Context, Tera};
 
 mod database;
 mod model;
+mod system;
 
 use sqlx::SqlitePool;
 
 // use crate::database;
+
+async fn devices(tmpl: web::Data<tera::Tera>, pool: web::Data<SqlitePool>) -> Result<HttpResponse, Error> {
+
+    let rendered = tmpl.render("devices.html", &Context::new())
+        .map_err(|_| error::ErrorInternalServerError("Template error"))?;
+    Ok(HttpResponse::Ok().content_type("text/html").body(rendered))
+}
 
 async fn audit(tmpl: web::Data<tera::Tera>, pool: web::Data<SqlitePool>) -> Result<HttpResponse, Error> {
     let audits = database::get_all_audits(&pool)
@@ -22,7 +31,6 @@ async fn audit(tmpl: web::Data<tera::Tera>, pool: web::Data<SqlitePool>) -> Resu
     let mut ctx = Context::new();
     ctx.insert("audits", &audits);
 
-    // let rendered = tmpl.render("index.html", &tera::Context::new())
     let rendered = tmpl.render("audit.html", &ctx)
         .map_err(|_| error::ErrorInternalServerError("Template error"))?;
     Ok(HttpResponse::Ok().content_type("text/html").body(rendered))
@@ -35,6 +43,8 @@ async fn index(tmpl: web::Data<tera::Tera>, pool: web::Data<SqlitePool>) -> Resu
 
     let mut ctx = Context::new();
     ctx.insert("audits", &audits);
+
+    get_host_info();
 
     // let rendered = tmpl.render("index.html", &tera::Context::new())
     let rendered = tmpl.render("index.html", &ctx)
@@ -50,13 +60,11 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
+
     let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL not set");
     let pool = database::init_pool(&database_url)
         .await
         .expect("Failed to create a database pool");
-
-    // get_all_audits(pool: &SqlitePool) -> Result<Vec<Audit>, &'static str> {
-
 
     HttpServer::new(move || {
         let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
@@ -69,6 +77,7 @@ async fn main() -> std::io::Result<()> {
             .service(Files::new("/static", "static").show_files_listing())
             .service(web::resource("/").route(web::get().to(index)))
             .service(web::resource("/audit").route(web::get().to(audit)))
+            .service(web::resource("/devices").route(web::get().to(devices)))
     })
     .bind(("127.0.0.1", 8080))?
     .workers(2)

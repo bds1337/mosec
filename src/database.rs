@@ -10,7 +10,5 @@ pub async fn init_pool(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
 }
 
 pub async fn get_all_audits(pool: &SqlitePool) -> Result<Vec<Audit>, &'static str> {
-// pub async fn get_all_audits(pool: &SqlitePool) -> Result<(), &'static str> {
 	Audit::all(pool).await.map_err(|_| "error retrieving audits")
-	// Audit::get_subject_from(pool).await.map_err(|_| "error")
 }
