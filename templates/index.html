@@ -1,25 +1,67 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>Журнал транзакций</h3>
-    <table>
-        <tr>
-            <th>Время</th>
-            <th>Откуда</th>
-            <th>Куда</th>
-            <th>Шифрование</th>
-        </tr>
-        {% for row in audits %}
-        <tr>
-            <th>{{row.time}}</th>
-            <th>{{row.subject_from}}</th>
-            <th>{{row.subject_to}}</th>
-            {% if row.encrypted %}
-            <th>Зашифрован</th>
-            {% else %}
-            <th>Открытый</th>
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
+<div class="card">
+<section class="hero is-info welcome is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Модуль безопасности
+      </h1>
+      <h2 class="subtitle">
+        Активен
+      </h2>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<div class="columns">
+  <div class="column is-6">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Текущие параметры
+        </p>
+      </header>
+      <div class="card-table">
+        <p>
+          Параметры
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="column is-6">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Последние события
+        </p>
+      </header>
+      <div class="card-table">
+        <div class="content">
+          <table class="table is-striped">
+            <thead>
+              <tr>
+                <th>Время</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+              </tr>
+            </thead>
+            {% for row in audits %}
+            <tbody>
+              <tr>
+                <th>{{row.time}}</th>
+                <th>{{row.subject_from}}</th>
+                <th>{{row.subject_to}}</th>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

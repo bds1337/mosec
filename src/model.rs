@@ -17,11 +17,7 @@ impl Audit {
 		let audits = sqlx::query_as!(Audit, r#"SELECT * FROM audits"#)
 			.fetch_all(connection)
 			.await?;
-
-		print!("{:?}", audits);
-
 		Ok(audits)
-		// Ok(())
 	}
 
 	pub async fn get_subject_from(connection: &SqlitePool) -> Result<(), sqlx::Error> {
@@ -31,9 +27,6 @@ impl Audit {
             "#)
         .fetch_one(connection)
         .await?;
-
-        print!("{:?}", test);
-
         Ok(())
     }
 }

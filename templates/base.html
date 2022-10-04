@@ -3,20 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <title>mosec demo</title>
-  <link rel="stylesheet" type="text/css" href="/static/app.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/bulma.css"/>
   <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+
 </head>
 <body>
- <div class="sidebar container">
-   <h3>Модуль безопасности</h3>
-   <p></p>
-   <ul>
-    <li><a href="/">Главная</a></li>
-     <li><a href="#audit">Журнал</a></li>
-   </ul>
- </div>
- <div class="main container">
-  {% block content %}{% endblock content %}
-</div>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item brand-text" href="/">
+          Модуль безопасности
+        </a>
+        <div class="navbar-burger burger" data-target="navMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <p class="navbar-item" href="#">
+            Пользователь
+          </p>
+          <a class="navbar-item" href="#">
+            Выход
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3 ">
+        <aside class="menu is-hidden-mobile">
+          <p class="menu-label">
+            Главная
+          </p>
+          <ul class="menu-list">
+            <li><a href="/">Главная панель</a></li>
+          </ul>
+          <p class="menu-label">
+            Статистика и журналы
+          </p>
+          <ul class="menu-list">
+            <li><a href="/audit">Журнал транзакций</a></li>
+            <li><a>Состояние системы</a></li>
+          </ul>
+          <p class="menu-label">
+            Администрирование
+          </p>
+          <ul class="menu-list">
+            <li><a>Отслеживаемые устройства</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-9">
+        {% block content %}{% endblock content %}
+      </div>
+    </div>
+  </div>
 </body>
 </html>

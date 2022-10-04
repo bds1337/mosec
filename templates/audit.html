@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="info-tiles">
+<div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Журнал транзакций
+        </p>
+      </header>
+  <table class="table is-fullwidth is-striped">
+    <thead>
+      <tr>
+        <th>Время</th>
+        <th>Откуда</th>
+        <th>Куда</th>
+      </tr>
+    </thead>
+    {% for row in audits %}
+    <tbody>
+      <tr>
+        <th>{{row.time}}</th>
+        <th>{{row.subject_from}}</th>
+        <th>{{row.subject_to}}</th>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+</section>
+{% endblock content %}

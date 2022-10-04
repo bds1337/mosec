@@ -14,9 +14,21 @@ use sqlx::SqlitePool;
 
 // use crate::database;
 
+async fn audit(tmpl: web::Data<tera::Tera>, pool: web::Data<SqlitePool>) -> Result<HttpResponse, Error> {
+    let audits = database::get_all_audits(&pool)
+        .await
+        .map_err(error::ErrorInternalServerError)?;
+
+    let mut ctx = Context::new();
+    ctx.insert("audits", &audits);
+
+    // let rendered = tmpl.render("index.html", &tera::Context::new())
+    let rendered = tmpl.render("audit.html", &ctx)
+        .map_err(|_| error::ErrorInternalServerError("Template error"))?;
+    Ok(HttpResponse::Ok().content_type("text/html").body(rendered))
+}
 
 async fn index(tmpl: web::Data<tera::Tera>, pool: web::Data<SqlitePool>) -> Result<HttpResponse, Error> {
-
     let audits = database::get_all_audits(&pool)
         .await
         .map_err(error::ErrorInternalServerError)?;
@@ -56,6 +68,7 @@ async fn main() -> std::io::Result<()> {
             // FIXME!: Stupid shit css include (use env or smth)
             .service(Files::new("/static", "static").show_files_listing())
             .service(web::resource("/").route(web::get().to(index)))
+            .service(web::resource("/audit").route(web::get().to(audit)))
     })
     .bind(("127.0.0.1", 8080))?
     .workers(2)
