@@ -16,3 +16,6 @@ cargo run
 
 ## Работа с sqlx-cli
 > https://github.com/launchbadge/sqlx/tree/main/sqlx-cli
+
+## Ресурсы
+design.tusur.ru

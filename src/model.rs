@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use sqlx::{SqlitePool, types::chrono};
 
+// FIXME: Use Transaction instead of Audit
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Audit {
     pub id: String,
@@ -9,6 +10,26 @@ pub struct Audit {
     pub time: chrono::NaiveDateTime,
     pub msg: Option<String>,
     pub encrypted: Option<bool>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Transaction {
+    pub id: String,
+    pub node_source: Option<String>,
+    pub node_source_addr: Option<String>,
+    pub node_dest: Option<String>,
+    pub node_dest_addr: Option<String>,
+    pub protocol: Option<String>,
+    pub event: Option<String>,
+    pub description: Option<String>,
+    pub time: chrono::NaiveDateTime,
+    pub status: Option<bool>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct User {
+    pub id: String,
+    pub node_source: Option<String>,
 }
 
 impl Audit {
