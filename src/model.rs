@@ -20,7 +20,7 @@ pub struct Transaction {
     pub node_dest: Option<String>,
     pub node_dest_addr: Option<String>,
     pub protocol: Option<String>,
-    pub event: Option<String>,
+    pub category: Option<String>,
     pub description: Option<String>,
     pub time: chrono::NaiveDateTime,
     pub status: Option<bool>,
@@ -33,6 +33,13 @@ pub struct Node {
     pub addr: Option<String>,
     pub protocol: Option<String>,
     pub description: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Category {
+    pub id: String,
+    pub name: String,
+    pub level: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

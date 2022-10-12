@@ -18,4 +18,7 @@ cargo run
 > https://github.com/launchbadge/sqlx/tree/main/sqlx-cli
 
 ## Ресурсы
-design.tusur.ru
+> design.tusur.ru
+
+## Модель
+Узлы <-> Транзакция <-> Категория
