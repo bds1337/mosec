@@ -27,9 +27,18 @@ pub struct Transaction {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct Node {
+    pub id: String,
+    pub name: Option<String>,
+    pub addr: Option<String>,
+    pub protocol: Option<String>,
+    pub description: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: String,
-    pub node_source: Option<String>,
+    pub name: Option<String>,
 }
 
 impl Audit {
