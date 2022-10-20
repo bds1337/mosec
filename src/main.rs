@@ -76,6 +76,10 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
+    for (key, value) in env::vars() {
+        println!("- {key}: {value}");
+    }
+
 
     let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL not set");
     let pool = database::init_pool(&database_url)
